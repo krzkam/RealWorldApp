@@ -17,9 +17,11 @@ namespace RealWorldApp.Pages
             InitializeComponent();
         }
 
-        private void TapCloseMenu_Tapped(object sender, EventArgs e)
+        private async void TapCloseMenu_Tapped(object sender, EventArgs e)
         {
-
+            await SlMenu.TranslateTo(-250, 0, 400, Easing.Linear);
+            GridOverlay.IsVisible = false;
+            
         }
 
         private void TapLogout_Tapped(object sender, EventArgs e)
@@ -47,9 +49,10 @@ namespace RealWorldApp.Pages
 
         }
 
-        private void ImgMenu_Tapped(object sender, EventArgs e)
+        private async void ImgMenu_Tapped(object sender, EventArgs e)
         {
-
+            GridOverlay.IsVisible = true;
+            await SlMenu.TranslateTo(0,0,400,Easing.Linear);
         }
 
         private void CvProducts_SelectionChanged(object sender, SelectionChangedEventArgs e)
