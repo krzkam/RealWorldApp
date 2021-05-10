@@ -12,17 +12,17 @@ namespace RealWorldApp
         {
             InitializeComponent();
 
-            var accessToken = Preferences.Get("accessToken", string.Empty);
-            if (string.IsNullOrEmpty(accessToken))
-            {
-                MainPage = new NavigationPage(new SignupPage());
-            }
-            else
-            {
-                MainPage = new NavigationPage(new HomePage());
-            }
+            //var accessToken = Preferences.Get("accessToken", string.Empty);
+            //if (string.IsNullOrEmpty(accessToken))
+            //{
+            //    MainPage = new NavigationPage(new SignupPage());
+            //}
+            //else
+            //{
+            //    MainPage = new NavigationPage(new HomePage());
+            //}
 
-            
+            MainPage = new NavigationPage(new HomePage());
         }
 
         protected override void OnStart()
