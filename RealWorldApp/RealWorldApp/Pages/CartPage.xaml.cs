@@ -44,7 +44,7 @@ namespace RealWorldApp.Pages
 
         private void BtnProceed_Clicked(object sender, EventArgs e)
         {
-
+            Navigation.PushModalAsync(new PlaceOrderPage(Convert.ToDouble(LblTotalPrice.Text)));
         }
 
         private async void TapClearCart_Tapped(object sender, EventArgs e)

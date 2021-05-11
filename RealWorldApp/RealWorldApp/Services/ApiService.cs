@@ -138,7 +138,7 @@ namespace RealWorldApp.Services
             return true;
         }
 
-        public async Task<OrderResponse> PlaceOrder(Order order)
+        public static async Task<OrderResponse> PlaceOrder(Order order)
         {
             var httpClient = new HttpClient();
             var json = JsonConvert.SerializeObject(order);
