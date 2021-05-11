@@ -78,7 +78,7 @@ namespace RealWorldApp.Pages
 
         private void TapCartIcon_Tapped(object sender, EventArgs e)
         {
-
+            Navigation.PushModalAsync(new CartPage());
         }
 
         private async void ImgMenu_Tapped(object sender, EventArgs e)
