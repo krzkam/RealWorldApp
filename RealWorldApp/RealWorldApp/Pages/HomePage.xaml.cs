@@ -16,12 +16,25 @@ namespace RealWorldApp.Pages
     public partial class HomePage : ContentPage
     {
         public ObservableCollection<PopularProduct> ProductsCollection;
+        public ObservableCollection<Category> CategoriesCollection;
 
         public HomePage()
         {
             InitializeComponent();
             ProductsCollection = new ObservableCollection<PopularProduct>();
+            CategoriesCollection = new ObservableCollection<Category>();
             GetPopularProducts();
+            GetCategories();
+        }
+
+        private async void GetCategories()
+        {
+            var categories = await ApiService.GetCategories();
+            foreach (var category in categories)
+            {
+                CategoriesCollection.Add(category);
+            }
+            CvCategories.ItemsSource = CategoriesCollection;
         }
 
         private async void GetPopularProducts()
