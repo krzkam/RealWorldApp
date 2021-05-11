@@ -1,5 +1,8 @@
-﻿using System;
+﻿using RealWorldApp.Models;
+using RealWorldApp.Services;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -12,10 +15,24 @@ namespace RealWorldApp.Pages
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ProductListPage : ContentPage
     {
+        public ObservableCollection<ProductByCategory> ProductByCategoryCollection;
         public ProductListPage(int categoryId, string categoryName)
         {
             InitializeComponent();
             LblCategoryName.Text = categoryName;
+            ProductByCategoryCollection = new ObservableCollection<ProductByCategory>();
+            GetProducts(categoryId);
+        }
+
+        private async void GetProducts(int id)
+        {
+            var products = await ApiService.GetProductByCategory(id);
+            foreach (var product in products)
+            {
+                ProductByCategoryCollection.Add(product);
+            }
+
+            CvProducts.ItemsSource = ProductByCategoryCollection;
         }
 
         private void TapBack_Tapped(object sender, EventArgs e)
