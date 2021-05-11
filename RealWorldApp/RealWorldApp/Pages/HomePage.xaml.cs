@@ -49,11 +49,11 @@ namespace RealWorldApp.Pages
             CvProducts.ItemsSource = ProductsCollection;
         }
 
-        private async void TapCloseMenu_Tapped(object sender, EventArgs e)
+        private void TapCloseMenu_Tapped(object sender, EventArgs e)
         {
-            await SlMenu.TranslateTo(-250, 0, 400, Easing.Linear);
-            GridOverlay.IsVisible = false;
-            
+            CloseHamburgerMenu();
+
+
         }
 
         private void TapLogout_Tapped(object sender, EventArgs e)
@@ -73,7 +73,7 @@ namespace RealWorldApp.Pages
 
         private void TapOrders_Tapped(object sender, EventArgs e)
         {
-
+            Navigation.PushModalAsync(new OrderPage());
         }
 
         private void TapCartIcon_Tapped(object sender, EventArgs e)
@@ -108,6 +108,18 @@ namespace RealWorldApp.Pages
             base.OnAppearing();
             var response = await ApiService.GetTotalCartItems(Preferences.Get("userId",0));
             LblTotalItems.Text = response.totalItems.ToString();
+        }
+
+        protected override void OnDisappearing()
+        {
+            base.OnDisappearing();
+            CloseHamburgerMenu();
+        }
+
+        private async void CloseHamburgerMenu()
+        {
+            await SlMenu.TranslateTo(-250, 0, 400, Easing.Linear);
+            GridOverlay.IsVisible = false;
         }
     }
 }
