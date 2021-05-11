@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Essentials;
 using System.Net.Http.Headers;
+using UnixTimeStamp;
 
 namespace RealWorldApp.Services
 {
@@ -49,7 +50,8 @@ namespace RealWorldApp.Services
             Preferences.Set("accessToken", result.access_token);
             Preferences.Set("userId", result.user_Id);
             Preferences.Set("userName", result.user_name);
-
+            Preferences.Set("tokenExpirationTime", result.expiration_Time);
+            Preferences.Set("currentTime", UnixTime.GetCurrentTime());
             return true;
         }
 
@@ -165,6 +167,24 @@ namespace RealWorldApp.Services
             var response = await httpClient.GetStringAsync(AppSettings.ApiUrl + "api/Orders/OrderDetails/" + orderId);
 
             return JsonConvert.DeserializeObject<List<Order>>(response);
+        }
+    }
+
+    public static class TokenValidator
+    {
+        public async static void CheckTokenValidity()
+        {
+            var expirationTime = Preferences.Get("tokenExpirationTime", 0);
+            Preferences.Set("currentTime", UnixTime.GetCurrentTime());
+            var currentTime = Preferences.Get("currentTime", 0);
+            if(expirationTime< currentTime)
+            {
+                var email = Preferences.Get("email", string.Empty);
+                var password = Preferences.Get("password", string.Empty);
+                await ApiService.Login(email, password);
+            }
+
+
         }
     }
 }
