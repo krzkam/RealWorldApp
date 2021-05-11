@@ -94,7 +94,10 @@ namespace RealWorldApp.Pages
 
         private void CvCategories_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
+            var currentSelection = e.CurrentSelection.FirstOrDefault() as Category;
+            if (currentSelection == null) return;
+            Navigation.PushModalAsync(new ProductListPage());
+            ((CollectionView)sender).SelectedItem = null;
         }
 
         protected async override void OnAppearing()
