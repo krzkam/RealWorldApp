@@ -96,7 +96,7 @@ namespace RealWorldApp.Pages
         {
             var currentSelection = e.CurrentSelection.FirstOrDefault() as Category;
             if (currentSelection == null) return;
-            Navigation.PushModalAsync(new ProductListPage());
+            Navigation.PushModalAsync(new ProductListPage(currentSelection.id,currentSelection.name));
             ((CollectionView)sender).SelectedItem = null;
         }
 

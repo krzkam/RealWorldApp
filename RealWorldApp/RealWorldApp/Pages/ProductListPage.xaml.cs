@@ -12,9 +12,10 @@ namespace RealWorldApp.Pages
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class ProductListPage : ContentPage
     {
-        public ProductListPage()
+        public ProductListPage(int categoryId, string categoryName)
         {
             InitializeComponent();
+            LblCategoryName.Text = categoryName;
         }
 
         private void TapBack_Tapped(object sender, EventArgs e)
