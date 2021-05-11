@@ -21,6 +21,14 @@ namespace RealWorldApp.Pages
             InitializeComponent();
             ShoppingCartCollection = new ObservableCollection<ShoppingCartItem>();
             GetShoppingCartItems();
+            GetTotalPrice();
+
+        }
+
+        private async void GetTotalPrice()
+        {
+            var totalPrice = await ApiService.GetCartSubTotal(Preferences.Get("userId", 0));
+            LblTotalPrice.Text = totalPrice.subTotal.ToString();
 
         }
 
