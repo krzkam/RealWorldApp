@@ -89,7 +89,7 @@ namespace RealWorldApp.Services
             return JsonConvert.DeserializeObject<List<PopularProduct>>(response);
         }
 
-        public async Task<bool> AddItemsInCart(AddToCard addToCard)
+        public static async Task<bool> AddItemsInCart(AddToCard addToCard)
         {
  
 
