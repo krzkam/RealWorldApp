@@ -96,5 +96,12 @@ namespace RealWorldApp.Pages
         {
 
         }
+
+        protected async override void OnAppearing()
+        {
+            base.OnAppearing();
+            var response = await ApiService.GetTotalCartItems(Preferences.Get("userId",0));
+            LblTotalItems.Text = response.totalItems.ToString();
+        }
     }
 }
