@@ -47,9 +47,19 @@ namespace RealWorldApp.Pages
 
         }
 
-        private void TapClearCart_Tapped(object sender, EventArgs e)
+        private async void TapClearCart_Tapped(object sender, EventArgs e)
         {
-
+            var response = await ApiService.ClearShoppingCart(Preferences.Get("userId", 0));
+            if (response)
+            {
+                await DisplayAlert("","Cart has been cleared","OK");
+                LvShoppingCart.ItemsSource = null;
+                LblTotalPrice.Text = "0";
+            }
+            else
+            {
+                await DisplayAlert("", "Error", "Cancel");
+            }
         }
 
         private void TapBack_Tapped(object sender, EventArgs e)
